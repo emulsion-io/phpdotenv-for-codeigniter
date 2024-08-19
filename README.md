@@ -1,4 +1,4 @@
-# PHP DotEnv for CodeIgniter
+# PHP DotEnv for CodeIgniter 3.2.x
 > Autodetect environment type and load variables from `.env`, `$_ENV` and `$_SERVER` automagically.
 
 ![](cover.png)
