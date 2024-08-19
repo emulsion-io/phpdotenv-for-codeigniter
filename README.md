@@ -1,10 +1,7 @@
 # PHP DotEnv for CodeIgniter
-> Autodetect environment type and load variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
+> Autodetect environment type and load variables from `.env`, `$_ENV` and `$_SERVER` automagically.
 
 ![](cover.png)
-
-
-
 
 
 ## Installation
@@ -21,42 +18,34 @@ $ composer install
 ```
 
 
-
-
-
 ## Configuration
 1. Enable your Composer Autoload and Hooks: `application/config/config.php`
 
-`$config['enable_hooks'] = FALSE;` to `$config['enable_hooks'] = TRUE;`
-
 `$config['composer_autoload'] = FALSE;` to `$config['composer_autoload'] = TRUE;`
 
+1. Add this code on index.php : `/index.php`
 
-2. Add this code to your application hooks: `application/config/hooks.php`
+beefore `require_once BASEPATH.'core/CodeIgniter.php';`
+
 
 ```
-// Use this code if your .env files on *CodeIgniter ROOT* folder
-$hook['pre_system'] = function() {
-	$dotenv = Dotenv\Dotenv::createImmutable(FCPATH);
-	$dotenv->load();
-};
+require_once __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
 ```
 
-or
-```
-// Use this code if your .env files on *application* folder
-$hook['pre_system'] = function() {
-	$dotenv = Dotenv\Dotenv::createImmutable(APPPATH);
-	$dotenv->load();
-};
-```
-
-3. Create your *.env* files
+1. Create your *.env* files
 ```
 $ cp .env.example .env
 ```
-
-
 
 
 
@@ -81,10 +70,6 @@ to
 	'database' => $_ENV['DB_DATABASE'],
 	'dbdriver' => $_ENV['DB_DRIVER'],
 ```
-
-
-
-
 
 
 ## Contributing
